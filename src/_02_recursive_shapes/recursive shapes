@@ -10,21 +10,63 @@ void setup(){
 
 void draw(){
   fill(#0000FF);
-  recursiveRect(0, 0, 100, 100, 2);
+  recursiveRect(100, 100, 100, 100, 2);
   fill(#FF0000);
-  recursiveEllipse(300, 150, 300, 200, 15);
+  recursiveEllipse(300, 300, 300, 200, 15);
   fill(#00FF00);
   recursiveTriangle(0, 300, 100, 400, 300, 300, 5); 
 }
 
 void recursiveRect(int x, int y, int w, int h, int scale){
-  //fill me out
+  rect(x,y,w,h);
+  if (w > 5){
+  recursiveRect(x,y,w - scale,h - scale, scale);
+  }
 }
 
 void recursiveEllipse(int x, int y, int w, int h, int scale){
-  //me too
+  ellipse(x,y,w,h);
+  if (w > 110){
+  recursiveEllipse(x,y,w - scale,h - scale, scale);
+  }
 }
 
 void recursiveTriangle(int x1, int y1, int x2, int y2,  int x3, int y3, int scale){
-  //me three
+  triangle(x1,y1,x2,y2,x3,y3);
+  if(avg(x1,x2,x3) > x1){
+    x1 = x1 + scale;
+  } else if(avg(x1,x2,x3) < x1) {
+    x1 = x1 - scale;
+  }
+   if(avg(x1,x2,x3) > x2){
+    x2 = x2 + scale;
+  } else if(avg(x1,x2,x3) < x2) {
+    x2 = x2 - scale;
+  }
+   if(avg(x1,x2,x3) > x3){
+    x3 = x3 + scale;
+  } else if(avg(x1,x2,x3) < x3) {
+    x3 = x3 - scale;
+  }
+  if(avg(y1,y2,y3) > y1){
+    y1 = y1 + scale;
+  } else if(avg(y1,y2,y3) < y1) {
+    y1 = y1 - scale;
+  }
+   if(avg(y1,y2,y3) > y2){
+    y2 = y2 + scale;
+  } else if(avg(y1,y2,y3) < y2) {
+    y2 = y2 - scale;
+  }
+   if(avg(y1,y2,y3) > y3){
+    y3 = y3 + scale;
+  } else if(avg(y1,y2,y3) < y3) {
+    y3 = y3 - scale;
+  }
+  if(x1 < 20){
+  recursiveTriangle(x1,x2,x3,y1,y2,y3,scale);
+  }
+}
+int avg(int x1,int x2,int x3){
+return x1+x2+x3/3;
 }
